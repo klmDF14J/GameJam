@@ -1,29 +1,33 @@
 package hsim.state;
 
+import hsim.object.GameObjectInstance;
+import hsim.object.GameObjectInstanceBed;
 import hsim.object.Objects;
+import hsim.patient.Patient;
 import hsim.resource.Images;
+import hsim.util.GameInfo;
 import hsim.util.KeyInfo;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class PlayState extends HSimGameState {
 
-	public static int mapSize = 10;
+	public static int mapSizeX = 18;
+	public static int mapSizeY = 10;
 	
-	private static int tileWidth = 48;
-	private static int tileHeight = 32;
+	public static int tileWidth = 64;
+	public static int tileHeight = 64;
 	
 	public static int offsetX = 0;
 	public static int offsetY = 0;
 	
-	private static int[][] floorTiles = new int[mapSize - offsetX][mapSize - offsetY];
-	private static int[][] wallTiles = new int[mapSize][mapSize];
-	public static int[][] objectTiles = new int[mapSize - offsetX][mapSize - offsetY];
+	private static int[][] floorTiles = new int[mapSizeX - offsetX][mapSizeY - offsetY];
+	private static int[][] wallTiles = new int[mapSizeX][mapSizeY];
+	public static GameObjectInstance[][] objectTiles = new GameObjectInstance[mapSizeX - offsetX][mapSizeY - offsetY];
 	
 	private static boolean showWalls = true;
 	
@@ -31,24 +35,48 @@ public class PlayState extends HSimGameState {
 
 	public PlayState(int id) {
 		super(id);
-		 
-		for(int i = 0; i < wallTiles.length; i++) {
+	}
+	
+	@Override
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		for(int i = 0; i < mapSizeY; i++) {
 			wallTiles[0][i] = 1;
 		}
 		
-		for(int i = 0; i < wallTiles.length; i++) {
+		for(int i = 0; i < mapSizeX; i++) {
 			wallTiles[i][0] = 1;
 		}
 		
-		for(int i = 0; i < wallTiles.length; i++) {
-			wallTiles[wallTiles.length - 1][i] = 1;
+		for(int i = 0; i < mapSizeY; i++) {
+			wallTiles[mapSizeX - 1][i] = 1;
 		}
 		
-		for(int i = 0; i < mapSize - offsetX; i++) {
-			for(int j = 0; j < mapSize - offsetY; j++) {
-				objectTiles[i][j] = -1;
-			}
-		}
+		objectTiles[0][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[0][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[2][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[2][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[4][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[4][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[6][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[6][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[8][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[8][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[10][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[10][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[12][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[12][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[14][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[14][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		
+		objectTiles[16][0] = new GameObjectInstanceBed("Hospital Bed");
+		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
 	}
 
 	int hightlightedI;
@@ -56,32 +84,44 @@ public class PlayState extends HSimGameState {
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		for(int i = 0; i < mapSize - offsetX; i++) {
-			  for(int j = 0; j < mapSize - offsetY; j++) {
-			    int x = j * tileWidth;
-			    int y = i * tileHeight;
-			    int isoX = x - y;
-			    int isoY = (x + y) / 2;
+		for(int i = 0; i < mapSizeX - offsetX; i++) {
+			  for(int j = 0; j < mapSizeY - offsetY; j++) {
+			    int x = i * tileWidth;
+			    int y = j * tileHeight;
+			    //int isoX = x - y;
+			    //int isoY = (x + y) / 2;
+			    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
+			    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
 			    if(i == hightlightedI && j == hightlightedJ) {
-			    	Images.tile_floor_highlighted.draw(isoX + 500, isoY + 100);
+			    	Images.tile_floor_highlighted.draw(x + renderOffsetX, y + renderOffsetY);
 			    }
 			    else {
-			    	Images.tile_floor.draw(isoX + 500, isoY + 100);
+			    	Images.tile_floor.draw(x + renderOffsetX, y + renderOffsetY);
 			    }
 			  }
 		}
 		
-		for(int i = 0; i < mapSize - offsetX; i++) {
-			  for(int j = 0; j < mapSize - offsetY; j++) {
-			    int x = j * tileWidth;
-			    int y = i * tileHeight;
-			    int isoX = x - y;
-			    int isoY = (x + y) / 2;
-			    if(objectTiles[i][j] != -1) {
-			    	Image img = Images.gameObjectImages.get(objectTiles[i][j]);
+		for(int i = 0; i < mapSizeX - offsetX; i++) {
+			  for(int j = 0; j < mapSizeY - offsetY; j++) {
+			    int x = i * tileWidth;
+			    int y = j * tileHeight;
+			    //int isoX = x - y;
+			    //int isoY = (x + y) / 2;
+			    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
+			    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
+			    if(objectTiles[i][j] != null) {
+			    	Image img = Images.gameObjectImages.get(objectTiles[i][j].storedGameObject.id);
 			    	//img = img.getFlippedCopy(true, false);
-			    	img.draw(isoX + 500, isoY + 100 - (tileHeight / 2) + 1);
+			    	img.draw(x + renderOffsetX, y + renderOffsetY);
 			    }
+			  }
+		}
+		
+		for(int i = 0; i < mapSizeX - offsetX; i++) {
+			  for(int j = 0; j < mapSizeY - offsetY; j++) {
+				  if(objectTiles[i][j] != null) {
+					  objectTiles[i][j].render(gc, sbg, g, i, j);
+				  }
 			  }
 		}
 	}
@@ -97,7 +137,7 @@ public class PlayState extends HSimGameState {
 			}
 		}
 		if(key == KeyInfo.right) {
-			if(hightlightedI + 1 < mapSize - offsetX) {
+			if(hightlightedI + 1 < mapSizeX - offsetX) {
 				hightlightedI++;
 			}
 		}
@@ -107,13 +147,13 @@ public class PlayState extends HSimGameState {
 			}
 		}
 		if(key == KeyInfo.down) {
-			if(hightlightedJ + 1 < mapSize - offsetY) {
+			if(hightlightedJ + 1 < mapSizeY - offsetY) {
 				hightlightedJ++;
 			}
 		}
 		if(key == KeyInfo.advance) {
 			Objects.gameObjects.get(currentObject).onPlaced(hightlightedI, hightlightedJ);
-			objectTiles[hightlightedI][hightlightedJ] = currentObject;
+			objectTiles[hightlightedI][hightlightedJ] = new GameObjectInstance(Objects.gameObjects.get(currentObject));
 		}
 		if(key == KeyInfo.select_up) {
 			if(currentObject + 1 < Objects.gameObjects.size()) {

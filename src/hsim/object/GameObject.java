@@ -1,5 +1,9 @@
 package hsim.object;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+
 import hsim.state.PlayState;
 
 public class GameObject {
@@ -19,10 +23,10 @@ public class GameObject {
 	public void onPlaced(int x, int y) {
 		System.out.println("Placed a " + name + " at x: " + x + ", y: " + y);
 		if(!canHaveMultiple) {
-			for(int i = 0; i < PlayState.mapSize - PlayState.offsetX; i++) {
-				for(int j = 0; j < PlayState.mapSize - PlayState.offsetY; j++) {
-					if(PlayState.objectTiles[i][j] == id) {
-						PlayState.objectTiles[i][j] = -1;
+			for(int i = 0; i < PlayState.mapSizeX - PlayState.offsetX; i++) {
+				for(int j = 0; j < PlayState.mapSizeY - PlayState.offsetY; j++) {
+					if(PlayState.objectTiles[i][j].storedGameObject.id == id) {
+						PlayState.objectTiles[i][j] = null;
 						System.out.println("Moved a " + name + " from x: " + i + ", y: " + j + " to x: " + x + ", y: " + y);
 					}
 				}
