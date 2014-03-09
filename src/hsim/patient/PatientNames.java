@@ -13,6 +13,7 @@ public class PatientNames {
 		"Cecil",
 		"Daryl",
 		"David",
+		"Dan",
 		"Dominic",
 		"Ethan",
 		"Fred",
@@ -22,6 +23,8 @@ public class PatientNames {
 		"Henry",
 		"James",
 		"John",
+		"Josh",
+		"Joeseph",
 		"Kyle",
 		"Keith",
 		"Louis",
@@ -42,12 +45,39 @@ public class PatientNames {
 		"Samuel",
 		"Toby",
 		"Walter",
+		"William",
 		"Xavier",
 		"Zachary"
 	};
 	
 	public static String[] first_names_female = {
-		
+		"Amy",
+		"Alison",
+		"Barbara",
+		"Catherine",
+		"Caitlin",
+		"Dawn",
+		"Doris",
+		"Emily",
+		"Fiona",
+		"Felicity",
+		"Gertrude",
+		"Hannah",
+		"Julie",
+		"Jane",
+		"Karen",
+		"Lucy",
+		"Mandy",
+		"Mary",
+		"Nora",
+		"Paula",
+		"Rita",
+		"Sally",
+		"Sarah",
+		"Tara",
+		"Veronica",
+		"Wendy",
+		"Zara"
 	};
 	
 	public static String generateName(boolean sex) {

@@ -1,6 +1,6 @@
 package hsim.state;
 
-import hsim.gui.GuiPatient;
+import hsim.gui.GuiPatientPopup;
 import hsim.handler.GuiHandler;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
@@ -62,16 +62,16 @@ public class PlayState extends HSimGameState {
 		((GameObjectInstanceBed) objectTiles[2][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
 		
 		objectTiles[4][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[4][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[4][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
 		
 		objectTiles[6][0] = new GameObjectInstanceBed("Hospital Bed");
 		((GameObjectInstanceBed) objectTiles[6][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
 		
 		objectTiles[8][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[8][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[8][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
 		
 		objectTiles[10][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[10][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[10][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
 		
 		objectTiles[12][0] = new GameObjectInstanceBed("Hospital Bed");
 		((GameObjectInstanceBed) objectTiles[12][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
@@ -80,7 +80,7 @@ public class PlayState extends HSimGameState {
 		((GameObjectInstanceBed) objectTiles[14][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
 		
 		objectTiles[16][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
 	}
 
 	int hightlightedI;
@@ -194,7 +194,7 @@ public class PlayState extends HSimGameState {
 				  for(int j = 0; j < mapSizeY - offsetY; j++) {
 					  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, tileWidth, tileHeight); 
 					  if(bounds_mouse.intersects(bounds_tile) && objectTiles[i][j] != null && objectTiles[i][j].storedGameObject.id == 1) {
-						  GuiHandler.showGui(new GuiPatient("patient", ((GameObjectInstanceBed) objectTiles[i][j]).patientUsingBed));
+						  GuiHandler.showGui(new GuiPatientPopup("patient_popup", x, y));
 					  }
 				  }
 			}

@@ -18,7 +18,7 @@ public class Patient {
 	}
 	
 	public Patient(boolean sex, int age, int health) {
-		this.name = PatientNames.generateName(MALE);
+		this.name = PatientNames.generateName(sex);
 		this.sex = sex;
 		this.age = age;
 		this.health = health;

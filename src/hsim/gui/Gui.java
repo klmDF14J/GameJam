@@ -1,11 +1,9 @@
 package hsim.gui;
 
 import hsim.handler.GuiHandler;
-import hsim.resource.Images;
 import hsim.util.KeyInfo;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class Gui {
 	
