@@ -13,17 +13,17 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class PlayState extends HSimGameState {
 
-	private static int mapSize = 10;
+	public static int mapSize = 10;
 	
 	private static int tileWidth = 48;
 	private static int tileHeight = 32;
 	
-	private static int offsetX = 0;
-	private static int offsetY = 0;
+	public static int offsetX = 0;
+	public static int offsetY = 0;
 	
 	private static int[][] floorTiles = new int[mapSize - offsetX][mapSize - offsetY];
 	private static int[][] wallTiles = new int[mapSize][mapSize];
-	private static int[][] objectTiles = new int[mapSize - offsetX][mapSize - offsetY];
+	public static int[][] objectTiles = new int[mapSize - offsetX][mapSize - offsetY];
 	
 	private static boolean showWalls = true;
 	
@@ -44,8 +44,8 @@ public class PlayState extends HSimGameState {
 			wallTiles[wallTiles.length - 1][i] = 1;
 		}
 		
-		for(int i = 0; i < objectTiles.length; i++) {
-			for(int j = 0; j < objectTiles.length; j++) {
+		for(int i = 0; i < mapSize - offsetX; i++) {
+			for(int j = 0; j < mapSize - offsetY; j++) {
 				objectTiles[i][j] = -1;
 			}
 		}
@@ -112,8 +112,8 @@ public class PlayState extends HSimGameState {
 			}
 		}
 		if(key == KeyInfo.advance) {
-			objectTiles[hightlightedI][hightlightedJ] = currentObject;
 			Objects.gameObjects.get(currentObject).onPlaced(hightlightedI, hightlightedJ);
+			objectTiles[hightlightedI][hightlightedJ] = currentObject;
 		}
 		if(key == KeyInfo.select_up) {
 			if(currentObject + 1 < Objects.gameObjects.size()) {

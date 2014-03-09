@@ -1,5 +1,7 @@
 package hsim.object;
 
+import hsim.state.PlayState;
+
 public class GameObject {
 	
 	public int id;
@@ -16,5 +18,14 @@ public class GameObject {
 	
 	public void onPlaced(int x, int y) {
 		System.out.println("Placed a " + name + " at x: " + x + ", y: " + y);
+		if(!canHaveMultiple) {
+			for(int i = 0; i < PlayState.mapSize - PlayState.offsetX; i++) {
+				for(int j = 0; j < PlayState.mapSize - PlayState.offsetY; j++) {
+					if(PlayState.objectTiles[i][j] == id) {
+						PlayState.objectTiles[i][j] = -1;
+					}
+				}
+			}
+		}
 	}
 }
