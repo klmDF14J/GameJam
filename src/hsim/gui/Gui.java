@@ -23,4 +23,8 @@ public class Gui {
 		}
 	}
 
+	public void onMousePressed(int button, int x, int y) {
+		
+	}
+
 }

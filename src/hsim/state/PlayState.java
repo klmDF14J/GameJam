@@ -199,5 +199,8 @@ public class PlayState extends HSimGameState {
 				  }
 			}
 		}
+		else {
+			GuiHandler.currentGui.onMousePressed(button, x, y);
+		}
 	}
 }
