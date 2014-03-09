@@ -20,6 +20,8 @@ public class Images {
 	public static Image tile_wall_2;
 	public static Image tile_floor_highlighted;
 	public static ArrayList<Image> gameObjectImages = new ArrayList<Image>();
+	public static Image male;
+	public static Image female;
 	
 	public static void init() {
 		splash = getImage("splash");
@@ -32,6 +34,9 @@ public class Images {
 		for(GameObject object : Objects.gameObjects) {
 			gameObjectImages.add(getImage("objects/" + object.texture_name));
 		}
+		
+		male = getImage("symbol/male");
+		female = getImage("symbol/female");
 	}
 
 	public static Image getImage(String imageName) {

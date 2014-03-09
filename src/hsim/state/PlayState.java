@@ -194,7 +194,7 @@ public class PlayState extends HSimGameState {
 				  for(int j = 0; j < mapSizeY - offsetY; j++) {
 					  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, tileWidth, tileHeight); 
 					  if(bounds_mouse.intersects(bounds_tile) && objectTiles[i][j] != null && objectTiles[i][j].storedGameObject.id == 1) {
-						  GuiHandler.showGui(new GuiPatientPopup("patient_popup", x, y));
+						  GuiHandler.showGui(new GuiPatientPopup("patient_popup", x, y, i, j));
 					  }
 				  }
 			}

@@ -1,9 +1,13 @@
 package hsim.gui;
 
+import hsim.handler.GuiHandler;
+import hsim.object.GameObjectInstanceBed;
 import hsim.resource.Images;
+import hsim.state.PlayState;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Rectangle;
 
 public class GuiPatientPopup extends Gui {
 
@@ -11,13 +15,17 @@ public class GuiPatientPopup extends Gui {
 	
 	private int x;
 	private int y;
+	private int i;
+	private int j;
 	
-	public GuiPatientPopup(String texture_name, int x, int y) {
+	public GuiPatientPopup(String texture_name, int x, int y, int i, int j) {
 		super(texture_name);
 		
 		this.gui_texture = Images.getImage("gui/" + texture_name);
 		this.x = x;
 		this.y = y;
+		this.i = i;
+		this.j = j;
 	}
 	
 	@Override
@@ -38,7 +46,12 @@ public class GuiPatientPopup extends Gui {
 	}
 	
 	@Override
-	public void onMousePressed(int button, int x, int y) {
+	public void onMousePressed(int button, int mouseX, int mouseY) {
+		Rectangle bounds_mouse = new Rectangle(mouseX, mouseY, 1, 1);
+		Rectangle bounds_info = new Rectangle(x, y, 256, 64);
+		if(bounds_mouse.intersects(bounds_info)) {
+			GuiHandler.showGui(new GuiPatientInfo("patient_info", ((GameObjectInstanceBed)PlayState.objectTiles[i][j]).patientUsingBed));
+		}
 		
 	}
 }
