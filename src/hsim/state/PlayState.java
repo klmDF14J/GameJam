@@ -179,6 +179,9 @@ public class PlayState extends HSimGameState {
 				}
 			}
 		}
+		else {
+			GuiHandler.currentGui.onKeyPressed(key, c);
+		}
 	}
 	
 	@Override

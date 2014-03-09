@@ -23,5 +23,6 @@ public class GuiPatient extends Gui {
 	public void render(Graphics g) {
 		float scale = 1F;
 		gui_texture.draw(GameInfo.resolution.getWidth() / 2 - (gui_texture.getWidth() * scale / 2), GameInfo.resolution.getHeight() / 2 - (gui_texture.getHeight() * scale / 2), scale);
+		g.drawString(patientUsingBed.name, GameInfo.resolution.getWidth() / 2 - (g.getFont().getWidth(patientUsingBed.name) / 2), 200);
 	}
 }
