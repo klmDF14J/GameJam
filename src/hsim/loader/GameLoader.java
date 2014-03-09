@@ -1,5 +1,6 @@
 package hsim.loader;
 
+import hsim.handler.GuiHandler;
 import hsim.object.Objects;
 import hsim.resource.Images;
 import hsim.util.GameInfo;
@@ -12,6 +13,8 @@ public class GameLoader {
 	public static void loadGame() {
 		Objects.init();
 		Images.init();
+		
+		GuiHandler.init();
 		
 		checkDevMode();
 	}

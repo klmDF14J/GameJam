@@ -34,7 +34,7 @@ public class Images {
 		}
 	}
 
-	private static Image getImage(String imageName) {
+	public static Image getImage(String imageName) {
 		try {
 			return new Image(SysInfo.userDir + "/res/images/" + imageName + ".png");
 		} catch (SlickException e) {

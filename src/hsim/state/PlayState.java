@@ -1,6 +1,8 @@
 package hsim.state;
 
+import hsim.gui.GuiPatient;
 import hsim.handler.GuiHandler;
+import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.Objects;
@@ -86,6 +88,8 @@ public class PlayState extends HSimGameState {
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		GuiHandler.g = g;
+		
 		for(int i = 0; i < mapSizeX - offsetX; i++) {
 			  for(int j = 0; j < mapSizeY - offsetY; j++) {
 			    int x = i * tileWidth;
@@ -154,8 +158,11 @@ public class PlayState extends HSimGameState {
 			}
 		}
 		if(key == KeyInfo.advance) {
-			Objects.gameObjects.get(currentObject).onPlaced(hightlightedI, hightlightedJ);
-			objectTiles[hightlightedI][hightlightedJ] = new GameObjectInstance(Objects.gameObjects.get(currentObject));
+			GameObject object = Objects.gameObjects.get(currentObject);
+			if(object != null) {
+				object.onPlaced(hightlightedI, hightlightedJ);
+				objectTiles[hightlightedI][hightlightedJ] = new GameObjectInstance(object);
+			}
 		}
 		if(key == KeyInfo.select_up) {
 			if(currentObject + 1 < Objects.gameObjects.size()) {
@@ -176,9 +183,9 @@ public class PlayState extends HSimGameState {
 	    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
 		for(int i = 0; i < mapSizeX - offsetX; i++) {
 			  for(int j = 0; j < mapSizeY - offsetY; j++) {
-				  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, 1, 1); 
+				  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, tileWidth, tileHeight); 
 				  if(bounds_mouse.intersects(bounds_tile)) {
-					  GuiHandler.showGui();
+					  GuiHandler.showGui(new GuiPatient("patient"));
 				  }
 			  }
 		}
