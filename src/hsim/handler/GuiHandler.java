@@ -9,12 +9,14 @@ public class GuiHandler {
 
 	public static Graphics g;
 	
+	public static Gui currentGui;
+	
 	public static void init() {
 		g = HospitalSimulator.app.getGraphics();
 	}
 	
 	public static void showGui(Gui gui) {
-		gui.render(g);
+		currentGui = gui;
 	}
 
 }

@@ -88,8 +88,6 @@ public class PlayState extends HSimGameState {
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		GuiHandler.g = g;
-		
 		for(int i = 0; i < mapSizeX - offsetX; i++) {
 			  for(int j = 0; j < mapSizeY - offsetY; j++) {
 			    int x = i * tileWidth;
@@ -130,64 +128,73 @@ public class PlayState extends HSimGameState {
 				  }
 			  }
 		}
+		
+		GuiHandler.g = g;
+		if(GuiHandler.currentGui != null) {
+			GuiHandler.currentGui.render(g);
+		}
 	}
 	
 	@Override
 	public void keyPressed(int key, char c) {
-		if(key == KeyInfo.ctrl) {
-			showWalls = showWalls ? false : true;
-		}
-		if(key == KeyInfo.left) {
-			if(hightlightedI > 0) {
-				hightlightedI--;
+		if(GuiHandler.currentGui == null) {
+			if(key == KeyInfo.ctrl) {
+				showWalls = showWalls ? false : true;
 			}
-		}
-		if(key == KeyInfo.right) {
-			if(hightlightedI + 1 < mapSizeX - offsetX) {
-				hightlightedI++;
+			if(key == KeyInfo.left) {
+				if(hightlightedI > 0) {
+					hightlightedI--;
+				}
 			}
-		}
-		if(key == KeyInfo.up) {
-			if(hightlightedJ > 0) {
-				hightlightedJ--;
+			if(key == KeyInfo.right) {
+				if(hightlightedI + 1 < mapSizeX - offsetX) {
+					hightlightedI++;
+				}
 			}
-		}
-		if(key == KeyInfo.down) {
-			if(hightlightedJ + 1 < mapSizeY - offsetY) {
-				hightlightedJ++;
+			if(key == KeyInfo.up) {
+				if(hightlightedJ > 0) {
+					hightlightedJ--;
+				}
 			}
-		}
-		if(key == KeyInfo.advance) {
-			GameObject object = Objects.gameObjects.get(currentObject);
-			if(object != null) {
-				object.onPlaced(hightlightedI, hightlightedJ);
-				objectTiles[hightlightedI][hightlightedJ] = new GameObjectInstance(object);
+			if(key == KeyInfo.down) {
+				if(hightlightedJ + 1 < mapSizeY - offsetY) {
+					hightlightedJ++;
+				}
 			}
-		}
-		if(key == KeyInfo.select_up) {
-			if(currentObject + 1 < Objects.gameObjects.size()) {
-				currentObject++;
+			if(key == KeyInfo.advance) {
+				GameObject object = Objects.gameObjects.get(currentObject);
+				if(object != null) {
+					object.onPlaced(hightlightedI, hightlightedJ);
+					objectTiles[hightlightedI][hightlightedJ] = new GameObjectInstance(object);
+				}
 			}
-		}
-		if(key == KeyInfo.select_down) {
-			if(currentObject > 0) {
-				currentObject--;
+			if(key == KeyInfo.select_up) {
+				if(currentObject + 1 < Objects.gameObjects.size()) {
+					currentObject++;
+				}
+			}
+			if(key == KeyInfo.select_down) {
+				if(currentObject > 0) {
+					currentObject--;
+				}
 			}
 		}
 	}
 	
 	@Override
 	public void mousePressed(int button, int x, int y) {
-		Rectangle bounds_mouse = new Rectangle(x, y, 1, 1);
-	    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
-	    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
-		for(int i = 0; i < mapSizeX - offsetX; i++) {
-			  for(int j = 0; j < mapSizeY - offsetY; j++) {
-				  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, tileWidth, tileHeight); 
-				  if(bounds_mouse.intersects(bounds_tile)) {
-					  GuiHandler.showGui(new GuiPatient("patient"));
+		if(GuiHandler.currentGui == null) {
+			Rectangle bounds_mouse = new Rectangle(x, y, 1, 1);
+		    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
+		    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
+			for(int i = 0; i < mapSizeX - offsetX; i++) {
+				  for(int j = 0; j < mapSizeY - offsetY; j++) {
+					  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, tileWidth, tileHeight); 
+					  if(bounds_mouse.intersects(bounds_tile) && objectTiles[i][j] != null && objectTiles[i][j].storedGameObject.id == 1) {
+						  GuiHandler.showGui(new GuiPatient("patient", ((GameObjectInstanceBed) objectTiles[i][j]).patientUsingBed));
+					  }
 				  }
-			  }
+			}
 		}
 	}
 }
