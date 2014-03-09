@@ -1,5 +1,6 @@
 package hsim.state;
 
+import hsim.handler.GuiHandler;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.Objects;
@@ -12,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class PlayState extends HSimGameState {
@@ -164,6 +166,21 @@ public class PlayState extends HSimGameState {
 			if(currentObject > 0) {
 				currentObject--;
 			}
+		}
+	}
+	
+	@Override
+	public void mousePressed(int button, int x, int y) {
+		Rectangle bounds_mouse = new Rectangle(x, y, 1, 1);
+	    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
+	    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
+		for(int i = 0; i < mapSizeX - offsetX; i++) {
+			  for(int j = 0; j < mapSizeY - offsetY; j++) {
+				  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, 1, 1); 
+				  if(bounds_mouse.intersects(bounds_tile)) {
+					  GuiHandler.showGui();
+				  }
+			  }
 		}
 	}
 }

@@ -52,11 +52,8 @@ public class PatientNames {
 	
 	public static String generateName(boolean sex) {
 		Random rand = new Random();
-		System.out.println("generating name");
 		if(sex == Patient.MALE) {
-			int num = rand.nextInt(first_names_male.length);
-			System.out.println("num: " + num);
-			return first_names_male[num];
+			return first_names_male[rand.nextInt(first_names_male.length)];
 		}
 		else {
 			return first_names_female[rand.nextInt(first_names_female.length)];
