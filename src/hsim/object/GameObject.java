@@ -23,6 +23,7 @@ public class GameObject {
 				for(int j = 0; j < PlayState.mapSize - PlayState.offsetY; j++) {
 					if(PlayState.objectTiles[i][j] == id) {
 						PlayState.objectTiles[i][j] = -1;
+						System.out.println("Moved a " + name + " from x: " + i + ", y: " + j + " to x: " + x + ", y: " + y);
 					}
 				}
 			}

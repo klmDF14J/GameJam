@@ -9,7 +9,7 @@ public class Objects {
 	public static void init() {
 		addObject(0, "Reception Desk", "object_desk", false);
 		addObject(1, "Office Chair", "object_chair", true);
-		addObject(2, "Hospital Bed", "object_bed", true);
+		gameObjects.add(new GameObjectBed(2, "Hospital Bed", "object_bed", true));
 	}
 	
 	public static void addObject(int id, String name, String texture_name, boolean canHaveMultiple) {
