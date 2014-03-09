@@ -22,7 +22,7 @@ public class HospitalSimulator extends StateBasedGame {
 	public static void main(String[] args) throws SlickException {
 		app = new AppGameContainer(new HospitalSimulator(GameInfo.title + " v" + GameInfo.version));
 		
-		app.setDisplayMode(1280, 720, false);
+		app.setDisplayMode(GameInfo.resolution.getWidth(), GameInfo.resolution.getHeight(), false);
 		app.setTargetFrameRate(GameInfo.fps);
 		app.start();
 	}
