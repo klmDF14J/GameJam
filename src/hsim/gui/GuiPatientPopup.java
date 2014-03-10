@@ -69,32 +69,62 @@ public class GuiPatientPopup extends Gui {
 					}
 				}
 			}
-			Random rand = new Random();
 			if(availableDoctors.size() > 0) {
-				GameObjectInstanceDoctor doctor = availableDoctors.get(rand.nextInt(availableDoctors.size()));
+				Random rand = new Random();
+				int randomNum = rand.nextInt(availableDoctors.size());
+				GameObjectInstanceDoctor doctor = availableDoctors.get(randomNum);
 				((GameObjectInstanceDoctor) PlayState.objectTiles[doctor.posX][doctor.posY]).busy = true;
 				while(doctor.posX < i) {
-					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-					doctor.posX++;
-					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					if(isClearAt(availableDoctors, doctor.posX + 1, doctor.posY)) {
+						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+						doctor.posX++;
+						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					}
+					else {
+						break;
+					}
 				}
 				while(doctor.posX > i) {
-					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-					doctor.posX--;
-					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					if(isClearAt(availableDoctors, doctor.posX - 1, doctor.posY)) {
+						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+						doctor.posX--;
+						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					}
+					else {
+						break;
+					}
 				}
 				while(doctor.posY < j - 1) {
-					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-					doctor.posY++;
-					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					if(isClearAt(availableDoctors, doctor.posX, doctor.posY + 1)) {
+						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+						doctor.posY++;
+						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					}
+					else {
+						break;
+					}
 				}
 				while(doctor.posY > j + 1) {
-					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-					doctor.posY--;
-					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					if(isClearAt(availableDoctors, doctor.posX, doctor.posY - 1)) {
+						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+						doctor.posY--;
+						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+					}
+					else {
+						break;
+					}
 				}
 			}
 		}
 		
+	}
+	
+	private boolean isClearAt(ArrayList<GameObjectInstanceDoctor> doctors, int x, int y) {
+		for(GameObjectInstanceDoctor doctor : doctors) {
+			if(doctor.posX == x && doctor.posY == y) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
