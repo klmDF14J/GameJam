@@ -5,6 +5,7 @@ import hsim.handler.GuiHandler;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
+import hsim.object.GameObjectInstanceDoctor;
 import hsim.object.Objects;
 import hsim.patient.Patient;
 import hsim.resource.Images;
@@ -81,6 +82,9 @@ public class PlayState extends HSimGameState {
 		
 		objectTiles[16][0] = new GameObjectInstanceBed("Hospital Bed");
 		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
+		
+		objectTiles[0][3] = new GameObjectInstanceDoctor("Doctor", 0, 3);
+		((GameObjectInstanceDoctor) objectTiles[0][3]).name = "Doctor Delicious";
 	}
 
 	int hightlightedI;

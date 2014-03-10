@@ -2,8 +2,12 @@ package hsim.gui;
 
 import hsim.handler.GuiHandler;
 import hsim.object.GameObjectInstanceBed;
+import hsim.object.GameObjectInstanceDoctor;
 import hsim.resource.Images;
 import hsim.state.PlayState;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -48,9 +52,48 @@ public class GuiPatientPopup extends Gui {
 	@Override
 	public void onMousePressed(int button, int mouseX, int mouseY) {
 		Rectangle bounds_mouse = new Rectangle(mouseX, mouseY, 1, 1);
+		
 		Rectangle bounds_info = new Rectangle(x, y, 256, 64);
+		Rectangle bounds_diagnose = new Rectangle(x, y + 64, 256, 64);
 		if(bounds_mouse.intersects(bounds_info)) {
 			GuiHandler.showGui(new GuiPatientInfo("patient_info", ((GameObjectInstanceBed)PlayState.objectTiles[i][j]).patientUsingBed));
+		}
+		if(bounds_mouse.intersects(bounds_diagnose)) {
+			ArrayList<GameObjectInstanceDoctor> availableDoctors = new ArrayList<GameObjectInstanceDoctor>();
+			for(int i = 0; i < PlayState.mapSizeX; i++) {
+				for(int j = 0; j < PlayState.mapSizeY; j++) {
+					if(PlayState.objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
+						if(!((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]).busy) {
+							availableDoctors.add((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]);
+						}
+					}
+				}
+			}
+			Random rand = new Random();
+			if(availableDoctors.size() > 0) {
+				GameObjectInstanceDoctor doctor = availableDoctors.get(rand.nextInt(availableDoctors.size()));
+				((GameObjectInstanceDoctor) PlayState.objectTiles[doctor.posX][doctor.posY]).busy = true;
+				while(doctor.posX < i) {
+					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+					doctor.posX++;
+					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+				}
+				while(doctor.posX > i) {
+					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+					doctor.posX--;
+					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+				}
+				while(doctor.posY < j - 1) {
+					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+					doctor.posY++;
+					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+				}
+				while(doctor.posY > j + 1) {
+					PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+					doctor.posY--;
+					PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+				}
+			}
 		}
 		
 	}
