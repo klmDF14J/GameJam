@@ -74,7 +74,7 @@ public class GuiPatientPopup extends Gui {
 				int randomNum = rand.nextInt(availableDoctors.size());
 				GameObjectInstanceDoctor doctor = availableDoctors.get(randomNum);
 				((GameObjectInstanceDoctor) PlayState.objectTiles[doctor.posX][doctor.posY]).busy = true;
-				while(doctor.posX < i) {
+				/*while(doctor.posX < i) {
 					if(isClearAt(availableDoctors, doctor.posX + 1, doctor.posY)) {
 						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
 						doctor.posX++;
@@ -113,18 +113,23 @@ public class GuiPatientPopup extends Gui {
 					else {
 						break;
 					}
-				}
+				}*/
+				
+				PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+				doctor.posX = i;
+				doctor.posY = j + 1;
+				PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
 			}
 		}
 		
 	}
 	
-	private boolean isClearAt(ArrayList<GameObjectInstanceDoctor> doctors, int x, int y) {
+	/*private boolean isClearAt(ArrayList<GameObjectInstanceDoctor> doctors, int x, int y) {
 		for(GameObjectInstanceDoctor doctor : doctors) {
 			if(doctor.posX == x && doctor.posY == y) {
 				return false;
 			}
 		}
 		return true;
-	}
+	}*/
 }
