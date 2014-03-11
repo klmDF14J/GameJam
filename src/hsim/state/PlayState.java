@@ -153,6 +153,9 @@ public class PlayState extends HSimGameState {
 					if(!objectTiles[i][j].currentTask.isFinished()) {
 						objectTiles[i][j].currentTask.timeTakenSoFar++;
 					}
+					else {
+						objectTiles[i][j].currentTask = null;
+					}
 				}
 			}
 		}

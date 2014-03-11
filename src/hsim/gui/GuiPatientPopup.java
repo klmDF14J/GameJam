@@ -5,7 +5,7 @@ import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
 import hsim.resource.Images;
 import hsim.state.PlayState;
-import hsim.task.Tasks;
+import hsim.task.TaskDiagnose;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -119,7 +119,7 @@ public class GuiPatientPopup extends Gui {
 				doctor.posX = i;
 				doctor.posY = j + 1;
 				PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-				PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = Tasks.diagnose;
+				PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
 				System.out.println(PlayState.objectTiles[doctor.posX][doctor.posY].currentTask.name);
 			}
 		}
