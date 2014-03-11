@@ -146,6 +146,19 @@ public class PlayState extends HSimGameState {
 	}
 	
 	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		for(int i = 0; i < mapSizeX; i++) {
+			for(int j = 0; j < mapSizeY; j++) {
+				if(objectTiles[i][j] != null && objectTiles[i][j].currentTask != null) {
+					if(!objectTiles[i][j].currentTask.isFinished()) {
+						objectTiles[i][j].currentTask.timeTakenSoFar++;
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
 	public void keyPressed(int key, char c) {
 		if(GuiHandler.currentGui == null) {
 			if(key == KeyInfo.ctrl) {

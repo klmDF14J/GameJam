@@ -5,6 +5,7 @@ import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
 import hsim.resource.Images;
 import hsim.state.PlayState;
+import hsim.task.Tasks;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -63,7 +64,7 @@ public class GuiPatientPopup extends Gui {
 			for(int i = 0; i < PlayState.mapSizeX; i++) {
 				for(int j = 0; j < PlayState.mapSizeY; j++) {
 					if(PlayState.objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
-						if(!((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]).busy) {
+						if(((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]).currentTask == null) {
 							availableDoctors.add((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]);
 						}
 					}
@@ -73,7 +74,6 @@ public class GuiPatientPopup extends Gui {
 				Random rand = new Random();
 				int randomNum = rand.nextInt(availableDoctors.size());
 				GameObjectInstanceDoctor doctor = availableDoctors.get(randomNum);
-				((GameObjectInstanceDoctor) PlayState.objectTiles[doctor.posX][doctor.posY]).busy = true;
 				/*while(doctor.posX < i) {
 					if(isClearAt(availableDoctors, doctor.posX + 1, doctor.posY)) {
 						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
@@ -119,6 +119,8 @@ public class GuiPatientPopup extends Gui {
 				doctor.posX = i;
 				doctor.posY = j + 1;
 				PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+				PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = Tasks.diagnose;
+				System.out.println(PlayState.objectTiles[doctor.posX][doctor.posY].currentTask.name);
 			}
 		}
 		

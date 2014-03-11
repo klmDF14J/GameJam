@@ -3,6 +3,7 @@ package hsim.loader;
 import hsim.handler.GuiHandler;
 import hsim.object.Objects;
 import hsim.resource.Images;
+import hsim.task.Tasks;
 import hsim.util.GameInfo;
 import hsim.util.SysInfo;
 
@@ -12,6 +13,7 @@ public class GameLoader {
 	
 	public static void loadGame() {
 		Objects.init();
+		Tasks.init();
 		Images.init();
 		
 		GuiHandler.init();
