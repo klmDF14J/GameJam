@@ -4,7 +4,6 @@ import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
 import hsim.patient.Patient;
-import hsim.state.PlayState;
 
 public class GameHandler {
 

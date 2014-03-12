@@ -11,6 +11,7 @@ import hsim.task.TaskTreat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
@@ -52,23 +53,29 @@ public class GuiPatientPopup extends Gui {
 		diagnose = new Button(x, y + 64, 256, 64) {
 			@Override
 			public boolean onClicked(Rectangle bounds_mouse) {
-				if(super.onClicked(bounds_mouse)) {			
-					GameObjectInstanceDoctor doctor = getRandomDoctor();
-					if(doctor != null) {
-						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-						doctor.posX = GuiPatientPopup.i;
-						doctor.posY = GuiPatientPopup.j + 1;
-						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-						PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
-						return true;
-					}
-					else {
-						return false;
+				if(super.onClicked(bounds_mouse)) {		
+					if(PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j] != null && PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j] instanceof GameObjectInstanceBed) {
+						GameObjectInstanceBed goib = (GameObjectInstanceBed) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j];
+						if(goib.patientUsingBed != null && !goib.patientUsingBed.hasBeenDiagnosed) {
+							GameObjectInstanceDoctor doctor = getRandomDoctor();
+							if(doctor != null) {
+								PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+								doctor.posX = GuiPatientPopup.i;
+								doctor.posY = GuiPatientPopup.j + 1;
+								PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+								PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
+								return true;
+							}
+							else {
+								return false;
+							}
+						}
+						else {
+							return false;
+						}
 					}
 				}
-				else {
-					return false;
-				}
+				return false;
 			}
 		};
 		
@@ -115,10 +122,18 @@ public class GuiPatientPopup extends Gui {
 		g.drawString(info, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(info) / 2), y + 25);
 		
 		String diagnose = "Diagnose Patient";
+		if(((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.hasBeenDiagnosed) {
+			g.setColor(Color.red);
+		}
 		g.drawString(diagnose, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(diagnose) / 2), y + 90);
+		g.setColor(Color.white);
 		
 		String treat = "Treat Patient";
+		if(!((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.hasBeenDiagnosed) {
+			g.setColor(Color.red);
+		}
 		g.drawString(treat, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(treat) / 2), y + 155);
+		g.setColor(Color.white);
 		
 		String discharge = "Discharge Patient";
 		g.drawString(discharge, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(discharge) / 2), y + 220);
