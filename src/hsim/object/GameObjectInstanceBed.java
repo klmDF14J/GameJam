@@ -26,12 +26,14 @@ public class GameObjectInstanceBed extends GameObjectInstance {
 		int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((PlayState.mapSizeX - PlayState.offsetX) * PlayState.tileWidth) / 2;
 		int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((PlayState.mapSizeY - PlayState.offsetY) * PlayState.tileHeight) / 2;
 		if(isOccupied()) {
-			Images.progress_bar.draw(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY - 24);
-			
-			Rectangle progress = new Rectangle(i * PlayState.tileWidth + renderOffsetX + 1, j * PlayState.tileHeight + renderOffsetY - 23, patientUsingBed.health * 0.62F, 14);
-			g.setColor(patientUsingBed.health >= 50 ? Color.green : patientUsingBed.health >= 25 ? Color.orange : Color.red);
-			g.fill(progress);
-			g.setColor(Color.white);
+			if(patientUsingBed.health > 0 && patientUsingBed.health < 100) {
+				Images.progress_bar.draw(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY - 24);
+				
+				Rectangle progress = new Rectangle(i * PlayState.tileWidth + renderOffsetX + 1, j * PlayState.tileHeight + renderOffsetY - 23, patientUsingBed.health * 0.62F, 14);
+				g.setColor(patientUsingBed.health >= 50 ? Color.green : patientUsingBed.health >= 25 ? Color.orange : Color.red);
+				g.fill(progress);
+				g.setColor(Color.white);
+			}
 		}
 	};
 	
