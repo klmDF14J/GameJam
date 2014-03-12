@@ -22,6 +22,7 @@ public class Images {
 	public static ArrayList<Image> gameObjectImages = new ArrayList<Image>();
 	public static Image male;
 	public static Image female;
+	public static Image progress_bar;
 	
 	public static void init() {
 		splash = getImage("splash");
@@ -37,6 +38,7 @@ public class Images {
 		
 		male = getImage("symbol/male");
 		female = getImage("symbol/female");
+		progress_bar = getImage("progress_bar");
 	}
 
 	public static Image getImage(String imageName) {

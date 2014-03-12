@@ -16,6 +16,7 @@ public class GameObjectInstanceBed extends GameObjectInstance {
 	}
 
 	public void render(org.newdawn.slick.GameContainer gc, org.newdawn.slick.state.StateBasedGame sbg, org.newdawn.slick.Graphics g, int i, int j) {
+		super.render(gc, sbg, g, i, j);
 		if(isOccupied()) {
 			g.drawString(patientUsingBed.name, i * PlayState.tileWidth + 80, j * PlayState.tileHeight + PlayState.tileHeight + 20);
 		}
