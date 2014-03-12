@@ -12,6 +12,7 @@ public class Patient {
 	public int age;
 	public int health;
 	public int deteriorationRate;
+	public boolean isDeteriorating;
 	
 	public Patient(boolean sex, int age, int health) {
 		this.name = PatientNames.generateName(sex);
@@ -20,6 +21,9 @@ public class Patient {
 		this.health = health;
 		
 		Random rand = new Random();
-		this.deteriorationRate = rand.nextInt(8);
+		this.isDeteriorating = rand.nextBoolean();
+		if(isDeteriorating) {
+			this.deteriorationRate = rand.nextInt(8);
+		}
 	}
 }

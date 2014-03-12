@@ -28,7 +28,7 @@ public class GameObjectInstanceBed extends GameObjectInstance {
 		if(isOccupied()) {
 			Images.progress_bar.draw(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY - 24);
 			
-			Rectangle progress = new Rectangle(i * PlayState.tileWidth + renderOffsetX + 1, j * PlayState.tileHeight + renderOffsetY - 23, patientUsingBed.health * 0.62F, 14);
+			Rectangle progress = new Rectangle(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY - 23, patientUsingBed.health * 0.62F, 14);
 			g.setColor(Color.green);
 			g.fill(progress);
 			g.setColor(Color.white);

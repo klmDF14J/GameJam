@@ -75,7 +75,7 @@ public class GameHandler {
 			for(int j = 0; j < mapSizeY; j++) {
 				if(objectTiles[i][j] != null && objectTiles[i][j] instanceof GameObjectInstanceBed) {
 					GameObjectInstanceBed goib = (GameObjectInstanceBed) objectTiles[i][j];
-					if(goib.isOccupied()) {
+					if(goib.isOccupied() && goib.patientUsingBed.isDeteriorating) {
 						goib.patientUsingBed.health -= goib.patientUsingBed.deteriorationRate;
 					}
 				}
