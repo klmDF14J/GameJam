@@ -1,6 +1,7 @@
 package hsim.state;
 
 import hsim.gui.GuiPatientPopup;
+import hsim.handler.GameHandler;
 import hsim.handler.GuiHandler;
 import hsim.handler.RenderHandler;
 import hsim.object.GameObject;
@@ -9,13 +10,11 @@ import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
 import hsim.object.Objects;
 import hsim.patient.Patient;
-import hsim.resource.Images;
 import hsim.util.GameInfo;
 import hsim.util.KeyInfo;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -105,18 +104,7 @@ public class PlayState extends HSimGameState {
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		for(int i = 0; i < mapSizeX; i++) {
-			for(int j = 0; j < mapSizeY; j++) {
-				if(objectTiles[i][j] != null && objectTiles[i][j].currentTask != null) {
-					if(!objectTiles[i][j].currentTask.isFinished()) {
-						objectTiles[i][j].currentTask.timeTakenSoFar++;
-					}
-					else {
-						objectTiles[i][j].currentTask = null;
-					}
-				}
-			}
-		}
+		GameHandler.updateTasks(mapSizeX, mapSizeY, objectTiles);
 	}
 	
 	@Override
