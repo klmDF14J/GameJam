@@ -4,6 +4,7 @@ import hsim.handler.GameHandler;
 import hsim.handler.InputHandler;
 import hsim.handler.RenderHandler;
 import hsim.object.GameObjectInstance;
+import hsim.util.GameInfo;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -45,9 +46,15 @@ public class PlayState extends HSimGameState {
 	    RenderHandler.renderGui(g);
 	}
 	
+	int timer;
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		GameHandler.updateTasks(mapSizeX, mapSizeY, objectTiles);
+		timer++;
+		if(timer == 60 * GameInfo.fps) {
+			GameHandler.deterioratePatients();
+		}
+		GameHandler.updateTasksAndPatients(mapSizeX, mapSizeY, objectTiles);
 	}
 	
 	@Override

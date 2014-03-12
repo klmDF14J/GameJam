@@ -7,7 +7,7 @@ import hsim.patient.Patient;
 
 public class GameHandler {
 
-	public static void updateTasks(int mapSizeX, int mapSizeY, GameObjectInstance[][] objectTiles) {
+	public static void updateTasksAndPatients(int mapSizeX, int mapSizeY, GameObjectInstance[][] objectTiles) {
 		for(int i = 0; i < mapSizeX; i++) {
 			for(int j = 0; j < mapSizeY; j++) {
 				if(objectTiles[i][j] != null && objectTiles[i][j].currentTask != null) {
@@ -21,6 +21,7 @@ public class GameHandler {
 			}
 		}
 	}
+	
 
 	public static void setupWard(GameObjectInstance[][] objectTiles) {
 		setupBeds(objectTiles);
@@ -65,6 +66,11 @@ public class GameHandler {
 		
 		objectTiles[4][3] = new GameObjectInstanceDoctor("Doctor", 4, 3);
 		((GameObjectInstanceDoctor) objectTiles[4][3]).name = "Doctor Large";
+	}
+
+
+	public static void deterioratePatients() {
+		
 	}
 
 }
