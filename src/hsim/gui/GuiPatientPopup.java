@@ -62,8 +62,10 @@ public class GuiPatientPopup extends Gui {
 								PlayState.objectTiles[doctor.posX][doctor.posY] = null;
 								doctor.posX = GuiPatientPopup.i;
 								doctor.posY = GuiPatientPopup.j + 1;
-								PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-								PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
+								if(PlayState.objectTiles[doctor.posX][doctor.posY] == null) {
+									PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+									PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
+								}
 								return true;
 							}
 							else {
@@ -91,8 +93,10 @@ public class GuiPatientPopup extends Gui {
 								PlayState.objectTiles[doctor.posX][doctor.posY] = null;
 								doctor.posX = GuiPatientPopup.i;
 								doctor.posY = GuiPatientPopup.j + 1;
-								PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-								PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskTreat();
+								if(PlayState.objectTiles[doctor.posX][doctor.posY] == null) {
+									PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+									PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskTreat();
+								}
 								return true;
 							}
 							else {
