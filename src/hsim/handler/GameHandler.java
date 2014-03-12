@@ -27,7 +27,7 @@ public class GameHandler {
 		setupDoctors(objectTiles);
 	}
 	
-	public static void setupBeds(GameObjectInstance[][] objectTiles) {
+	private static void setupBeds(GameObjectInstance[][] objectTiles) {
 		objectTiles[0][0] = new GameObjectInstanceBed("Hospital Bed");
 		((GameObjectInstanceBed) objectTiles[0][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
 		
@@ -56,7 +56,7 @@ public class GameHandler {
 		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
 	}
 	
-	public static void setupDoctors(GameObjectInstance[][] objectTiles) {
+	private static void setupDoctors(GameObjectInstance[][] objectTiles) {
 		objectTiles[0][3] = new GameObjectInstanceDoctor("Doctor", 0, 3);
 		((GameObjectInstanceDoctor) objectTiles[0][3]).name = "Doctor Delicious";
 		

@@ -17,7 +17,7 @@ public class RenderHandler {
 		renderMapObjectsSpecialRender(mapSizeX, mapSizeY, offsetX, offsetY, objectTiles, gc, sbg, g);
 	}
 	
-	public static void renderMapFloor(int mapSizeX, int mapSizeY, int offsetX, int offsetY, int tileWidth, int tileHeight, int highlightedI, int highlightedJ) {
+	private static void renderMapFloor(int mapSizeX, int mapSizeY, int offsetX, int offsetY, int tileWidth, int tileHeight, int highlightedI, int highlightedJ) {
 		for(int i = 0; i < mapSizeX - offsetX; i++) {
 			  for(int j = 0; j < mapSizeY - offsetY; j++) {
 			    int x = i * tileWidth;
@@ -36,7 +36,7 @@ public class RenderHandler {
 		}
 	}
 	
-	public static void renderMapObjects(int mapSizeX, int mapSizeY, int offsetX, int offsetY, int tileWidth, int tileHeight, int highlightedI, int highlightedJ, GameObjectInstance[][] objectTiles) {
+	private static void renderMapObjects(int mapSizeX, int mapSizeY, int offsetX, int offsetY, int tileWidth, int tileHeight, int highlightedI, int highlightedJ, GameObjectInstance[][] objectTiles) {
 		for(int i = 0; i < mapSizeX - offsetX; i++) {
 			  for(int j = 0; j < mapSizeY - offsetY; j++) {
 			    int x = i * tileWidth;
@@ -53,7 +53,7 @@ public class RenderHandler {
 		}
 	}
 	
-	public static void renderMapObjectsSpecialRender(int mapSizeX, int mapSizeY, int offsetX, int offsetY, GameObjectInstance[][] objectTiles, GameContainer gc, StateBasedGame sbg, Graphics g) {
+	private static void renderMapObjectsSpecialRender(int mapSizeX, int mapSizeY, int offsetX, int offsetY, GameObjectInstance[][] objectTiles, GameContainer gc, StateBasedGame sbg, Graphics g) {
 		for(int i = 0; i < mapSizeX - offsetX; i++) {
 			  for(int j = 0; j < mapSizeY - offsetY; j++) {
 				  if(objectTiles[i][j] != null) {
