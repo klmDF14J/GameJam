@@ -4,6 +4,7 @@ import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
 import hsim.patient.Patient;
+import hsim.state.PlayState;
 
 public class GameHandler {
 
@@ -69,8 +70,17 @@ public class GameHandler {
 	}
 
 
-	public static void deterioratePatients() {
-		
+	public static void deterioratePatients(int mapSizeX, int mapSizeY, GameObjectInstance[][] objectTiles) {
+		for(int i = 0; i < mapSizeX; i++) {
+			for(int j = 0; j < mapSizeY; j++) {
+				if(objectTiles[i][j] != null && objectTiles[i][j] instanceof GameObjectInstanceBed) {
+					GameObjectInstanceBed goib = (GameObjectInstanceBed) objectTiles[i][j];
+					if(goib.isOccupied()) {
+						goib.patientUsingBed.health -= goib.patientUsingBed.deteriorationRate;
+					}
+				}
+			}
+		}
 	}
 
 }
