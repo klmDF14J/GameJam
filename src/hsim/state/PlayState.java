@@ -87,10 +87,10 @@ public class PlayState extends HSimGameState {
 		((GameObjectInstanceDoctor) objectTiles[0][3]).name = "Doctor Delicious";
 		
 		objectTiles[2][3] = new GameObjectInstanceDoctor("Doctor", 2, 3);
-		((GameObjectInstanceDoctor) objectTiles[2][3]).name = "Doctor Delicious";
+		((GameObjectInstanceDoctor) objectTiles[2][3]).name = "Doctor Mini";
 		
 		objectTiles[4][3] = new GameObjectInstanceDoctor("Doctor", 4, 3);
-		((GameObjectInstanceDoctor) objectTiles[4][3]).name = "Doctor Delicious";
+		((GameObjectInstanceDoctor) objectTiles[4][3]).name = "Doctor Large";
 	}
 
 	int hightlightedI;

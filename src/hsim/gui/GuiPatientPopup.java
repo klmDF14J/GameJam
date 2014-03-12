@@ -64,7 +64,9 @@ public class GuiPatientPopup extends Gui {
 			for(int i = 0; i < PlayState.mapSizeX; i++) {
 				for(int j = 0; j < PlayState.mapSizeY; j++) {
 					if(PlayState.objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
-						if(((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]).currentTask == null) {
+						System.out.println(PlayState.objectTiles[i][j].currentTask == null);
+						if(PlayState.objectTiles[i][j].currentTask == null) {
+							System.out.println("Adding doctor: " + i + ", " + j);
 							availableDoctors.add((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]);
 						}
 					}
@@ -74,64 +76,14 @@ public class GuiPatientPopup extends Gui {
 				Random rand = new Random();
 				int randomNum = rand.nextInt(availableDoctors.size());
 				GameObjectInstanceDoctor doctor = availableDoctors.get(randomNum);
-				/*while(doctor.posX < i) {
-					if(isClearAt(availableDoctors, doctor.posX + 1, doctor.posY)) {
-						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-						doctor.posX++;
-						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-					}
-					else {
-						break;
-					}
-				}
-				while(doctor.posX > i) {
-					if(isClearAt(availableDoctors, doctor.posX - 1, doctor.posY)) {
-						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-						doctor.posX--;
-						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-					}
-					else {
-						break;
-					}
-				}
-				while(doctor.posY < j - 1) {
-					if(isClearAt(availableDoctors, doctor.posX, doctor.posY + 1)) {
-						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-						doctor.posY++;
-						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-					}
-					else {
-						break;
-					}
-				}
-				while(doctor.posY > j + 1) {
-					if(isClearAt(availableDoctors, doctor.posX, doctor.posY - 1)) {
-						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-						doctor.posY--;
-						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-					}
-					else {
-						break;
-					}
-				}*/
 				
 				PlayState.objectTiles[doctor.posX][doctor.posY] = null;
 				doctor.posX = i;
 				doctor.posY = j + 1;
 				PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
 				PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
-				System.out.println(PlayState.objectTiles[doctor.posX][doctor.posY].currentTask.name);
 			}
 		}
 		
 	}
-	
-	/*private boolean isClearAt(ArrayList<GameObjectInstanceDoctor> doctors, int x, int y) {
-		for(GameObjectInstanceDoctor doctor : doctors) {
-			if(doctor.posX == x && doctor.posY == y) {
-				return false;
-			}
-		}
-		return true;
-	}*/
 }

@@ -25,7 +25,7 @@ public class Task {
 			return true;
 		}
 		else {
-			System.out.println("Task has been going for: " + timeTakenSoFar + " / " + time);
+			//System.out.println("Task has been going for: " + timeTakenSoFar + " / " + time);
 			return false;
 		}
 	}
