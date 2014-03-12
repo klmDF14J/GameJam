@@ -20,8 +20,11 @@ public class GuiPatientPopup extends Gui {
 	
 	private int x;
 	private int y;
-	private int i;
-	private int j;
+	public static int i;
+	public static int j;
+	
+	private Button info;
+	private Button diagnose;
 	
 	public GuiPatientPopup(String texture_name, int x, int y, int i, int j) {
 		super(texture_name);
@@ -31,6 +34,54 @@ public class GuiPatientPopup extends Gui {
 		this.y = y;
 		this.i = i;
 		this.j = j;
+		
+		info = new Button(x, y, 256, 64) {
+			@Override
+			public boolean onClicked(Rectangle bounds_mouse) {
+				if(super.onClicked(bounds_mouse)) {
+					GuiHandler.showGui(new GuiPatientInfo("patient_info", ((GameObjectInstanceBed)PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j]).patientUsingBed));
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		};
+		diagnose = new Button(x, y + 64, 256, 64) {
+			@Override
+			public boolean onClicked(Rectangle bounds_mouse) {
+				if(super.onClicked(bounds_mouse)) {			
+					ArrayList<GameObjectInstanceDoctor> availableDoctors = new ArrayList<GameObjectInstanceDoctor>();
+					for(int i = 0; i < PlayState.mapSizeX; i++) {
+						for(int j = 0; j < PlayState.mapSizeY; j++) {
+							if(PlayState.objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
+								if(PlayState.objectTiles[i][j].currentTask == null) {
+									availableDoctors.add((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]);
+								}
+							}
+						}
+					}
+					if(availableDoctors.size() > 0) {
+						Random rand = new Random();
+						int randomNum = rand.nextInt(availableDoctors.size());
+						GameObjectInstanceDoctor doctor = availableDoctors.get(randomNum);
+						
+						PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+						doctor.posX = GuiPatientPopup.i;
+						doctor.posY = GuiPatientPopup.j + 1;
+						PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
+						PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
+				else {
+					return false;
+				}
+			}
+		};
 	}
 	
 	@Override
@@ -53,35 +104,8 @@ public class GuiPatientPopup extends Gui {
 	@Override
 	public void onMousePressed(int button, int mouseX, int mouseY) {
 		Rectangle bounds_mouse = new Rectangle(mouseX, mouseY, 1, 1);
-		
-		Rectangle bounds_info = new Rectangle(x, y, 256, 64);
-		Rectangle bounds_diagnose = new Rectangle(x, y + 64, 256, 64);
-		if(bounds_mouse.intersects(bounds_info)) {
-			GuiHandler.showGui(new GuiPatientInfo("patient_info", ((GameObjectInstanceBed)PlayState.objectTiles[i][j]).patientUsingBed));
-		}
-		if(bounds_mouse.intersects(bounds_diagnose)) {
-			ArrayList<GameObjectInstanceDoctor> availableDoctors = new ArrayList<GameObjectInstanceDoctor>();
-			for(int i = 0; i < PlayState.mapSizeX; i++) {
-				for(int j = 0; j < PlayState.mapSizeY; j++) {
-					if(PlayState.objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
-						if(PlayState.objectTiles[i][j].currentTask == null) {
-							availableDoctors.add((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]);
-						}
-					}
-				}
-			}
-			if(availableDoctors.size() > 0) {
-				Random rand = new Random();
-				int randomNum = rand.nextInt(availableDoctors.size());
-				GameObjectInstanceDoctor doctor = availableDoctors.get(randomNum);
-				
-				PlayState.objectTiles[doctor.posX][doctor.posY] = null;
-				doctor.posX = i;
-				doctor.posY = j + 1;
-				PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
-				PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
-			}
-		}
-		
+
+		info.onClicked(bounds_mouse);
+		diagnose.onClicked(bounds_mouse);
 	}
 }
