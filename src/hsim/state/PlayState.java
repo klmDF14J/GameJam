@@ -2,6 +2,7 @@ package hsim.state;
 
 import hsim.gui.GuiPatientPopup;
 import hsim.handler.GuiHandler;
+import hsim.handler.RenderHandler;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
@@ -93,56 +94,13 @@ public class PlayState extends HSimGameState {
 		((GameObjectInstanceDoctor) objectTiles[4][3]).name = "Doctor Large";
 	}
 
-	int hightlightedI;
-	int hightlightedJ;
+	int highlightedI;
+	int highlightedJ;
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		for(int i = 0; i < mapSizeX - offsetX; i++) {
-			  for(int j = 0; j < mapSizeY - offsetY; j++) {
-			    int x = i * tileWidth;
-			    int y = j * tileHeight;
-			    //int isoX = x - y;
-			    //int isoY = (x + y) / 2;
-			    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
-			    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
-			    if(i == hightlightedI && j == hightlightedJ) {
-			    	Images.tile_floor_highlighted.draw(x + renderOffsetX, y + renderOffsetY);
-			    }
-			    else {
-			    	Images.tile_floor.draw(x + renderOffsetX, y + renderOffsetY);
-			    }
-			  }
-		}
-		
-		for(int i = 0; i < mapSizeX - offsetX; i++) {
-			  for(int j = 0; j < mapSizeY - offsetY; j++) {
-			    int x = i * tileWidth;
-			    int y = j * tileHeight;
-			    //int isoX = x - y;
-			    //int isoY = (x + y) / 2;
-			    int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((mapSizeX - offsetX) * tileWidth) / 2;
-			    int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((mapSizeY - offsetY) * tileHeight) / 2;
-			    if(objectTiles[i][j] != null) {
-			    	Image img = Images.gameObjectImages.get(objectTiles[i][j].storedGameObject.id);
-			    	//img = img.getFlippedCopy(true, false);
-			    	img.draw(x + renderOffsetX, y + renderOffsetY);
-			    }
-			  }
-		}
-		
-		for(int i = 0; i < mapSizeX - offsetX; i++) {
-			  for(int j = 0; j < mapSizeY - offsetY; j++) {
-				  if(objectTiles[i][j] != null) {
-					  objectTiles[i][j].render(gc, sbg, g, i, j);
-				  }
-			  }
-		}
-		
-		GuiHandler.g = g;
-		if(GuiHandler.currentGui != null) {
-			GuiHandler.currentGui.render(g);
-		}
+	    RenderHandler.renderMap(mapSizeX, mapSizeY, offsetX, offsetY, tileWidth, tileHeight, highlightedI, highlightedJ, objectTiles, gc, sbg, g);
+	    RenderHandler.renderGui(g);
 	}
 	
 	@Override
@@ -168,30 +126,30 @@ public class PlayState extends HSimGameState {
 				showWalls = showWalls ? false : true;
 			}
 			if(key == KeyInfo.left) {
-				if(hightlightedI > 0) {
-					hightlightedI--;
+				if(highlightedI > 0) {
+					highlightedI--;
 				}
 			}
 			if(key == KeyInfo.right) {
-				if(hightlightedI + 1 < mapSizeX - offsetX) {
-					hightlightedI++;
+				if(highlightedI + 1 < mapSizeX - offsetX) {
+					highlightedI++;
 				}
 			}
 			if(key == KeyInfo.up) {
-				if(hightlightedJ > 0) {
-					hightlightedJ--;
+				if(highlightedJ > 0) {
+					highlightedJ--;
 				}
 			}
 			if(key == KeyInfo.down) {
-				if(hightlightedJ + 1 < mapSizeY - offsetY) {
-					hightlightedJ++;
+				if(highlightedJ + 1 < mapSizeY - offsetY) {
+					highlightedJ++;
 				}
 			}
 			if(key == KeyInfo.advance) {
 				GameObject object = Objects.gameObjects.get(currentObject);
 				if(object != null) {
-					object.onPlaced(hightlightedI, hightlightedJ);
-					objectTiles[hightlightedI][hightlightedJ] = new GameObjectInstance(object);
+					object.onPlaced(highlightedI, highlightedJ);
+					objectTiles[highlightedI][highlightedJ] = new GameObjectInstance(object);
 				}
 			}
 			if(key == KeyInfo.select_up) {
