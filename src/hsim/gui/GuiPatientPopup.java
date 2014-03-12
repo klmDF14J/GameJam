@@ -64,9 +64,7 @@ public class GuiPatientPopup extends Gui {
 			for(int i = 0; i < PlayState.mapSizeX; i++) {
 				for(int j = 0; j < PlayState.mapSizeY; j++) {
 					if(PlayState.objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
-						System.out.println(PlayState.objectTiles[i][j].currentTask == null);
 						if(PlayState.objectTiles[i][j].currentTask == null) {
-							System.out.println("Adding doctor: " + i + ", " + j);
 							availableDoctors.add((GameObjectInstanceDoctor) PlayState.objectTiles[i][j]);
 						}
 					}
