@@ -16,6 +16,14 @@ public class GameHandler {
 						objectTiles[i][j].currentTask.timeTakenSoFar++;
 					}
 					else {
+						if(objectTiles[i][j] instanceof GameObjectInstanceDoctor) {
+							if(objectTiles[i][j].currentTask.name == "diagnose") {
+								if(objectTiles[i][j - 1] != null && objectTiles[i][j - 1] instanceof GameObjectInstanceBed) {
+									((GameObjectInstanceBed) objectTiles[i][j - 1]).patientUsingBed.hasBeenDiagnosed = true;
+									System.out.println(((GameObjectInstanceBed) PlayState.objectTiles[i][j - 1]).patientUsingBed.hasBeenDiagnosed);
+								}
+							}
+						}
 						objectTiles[i][j].currentTask = null;
 					}
 				}

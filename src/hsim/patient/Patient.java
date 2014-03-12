@@ -13,6 +13,7 @@ public class Patient {
 	public int health;
 	public int deteriorationRate;
 	public boolean isDeteriorating;
+	public boolean hasBeenDiagnosed = false;
 	
 	public Patient(boolean sex, int age, int health) {
 		this.name = PatientNames.generateName(sex);
