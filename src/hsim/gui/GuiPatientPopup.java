@@ -57,7 +57,13 @@ public class GuiPatientPopup extends Gui {
 					if(PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j] != null && PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j] instanceof GameObjectInstanceBed) {
 						GameObjectInstanceBed goib = (GameObjectInstanceBed) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j];
 						if(goib.patientUsingBed != null && !goib.patientUsingBed.hasBeenDiagnosed) {
-							GameObjectInstanceDoctor doctor = getRandomDoctor();
+							GameObjectInstanceDoctor doctor;
+							if(PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j + 1] != null && PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j + 1] instanceof GameObjectInstanceDoctor) {
+								doctor = (GameObjectInstanceDoctor) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j + 1];
+							}
+							else {
+								doctor = getRandomDoctor();
+							}
 							if(doctor != null) {
 								int oldX = doctor.posX;
 								int oldY = doctor.posY;
@@ -94,7 +100,13 @@ public class GuiPatientPopup extends Gui {
 					if(PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j] != null && PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j] instanceof GameObjectInstanceBed) {
 						GameObjectInstanceBed goib = (GameObjectInstanceBed) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j];
 						if(goib.patientUsingBed != null && goib.patientUsingBed.hasBeenDiagnosed) {
-							GameObjectInstanceDoctor doctor = getRandomDoctor();
+							GameObjectInstanceDoctor doctor;
+							if(PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j + 1] != null && PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j + 1] instanceof GameObjectInstanceDoctor) {
+								doctor = (GameObjectInstanceDoctor) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j + 1];
+							}
+							else {
+								doctor = getRandomDoctor();
+							}
 							if(doctor != null) {
 								int oldX = doctor.posX;
 								int oldY = doctor.posY;
