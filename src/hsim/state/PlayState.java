@@ -55,7 +55,7 @@ public class PlayState extends HSimGameState {
 			GameHandler.deterioratePatients(mapSizeX, mapSizeY, objectTiles);
 			timer = 0;
 		}
-		GameHandler.updateTasksAndPatients(mapSizeX, mapSizeY, objectTiles);
+		GameHandler.updateTasks(mapSizeX, mapSizeY, objectTiles);
 	}
 	
 	@Override

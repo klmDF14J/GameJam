@@ -7,7 +7,7 @@ import hsim.patient.Patient;
 
 public class GameHandler {
 
-	public static void updateTasksAndPatients(int mapSizeX, int mapSizeY, GameObjectInstance[][] objectTiles) {
+	public static void updateTasks(int mapSizeX, int mapSizeY, GameObjectInstance[][] objectTiles) {
 		for(int i = 0; i < mapSizeX; i++) {
 			for(int j = 0; j < mapSizeY; j++) {
 				if(objectTiles[i][j] != null && objectTiles[i][j].currentTask != null) {
@@ -81,6 +81,7 @@ public class GameHandler {
 							}
 							else {
 								goib.patientUsingBed.health = 0;
+								goib.patientUsingBed = null;
 							}
 						}
 					}
