@@ -59,12 +59,18 @@ public class GuiPatientPopup extends Gui {
 						if(goib.patientUsingBed != null && !goib.patientUsingBed.hasBeenDiagnosed) {
 							GameObjectInstanceDoctor doctor = getRandomDoctor();
 							if(doctor != null) {
-								PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+								int oldX = doctor.posX;
+								int oldY = doctor.posY;
 								doctor.posX = GuiPatientPopup.i;
 								doctor.posY = GuiPatientPopup.j + 1;
-								if(PlayState.objectTiles[doctor.posX][doctor.posY] == null) {
+								if(PlayState.objectTiles[doctor.posX][doctor.posY] == null || PlayState.objectTiles[doctor.posX][doctor.posY] == doctor) {
+									PlayState.objectTiles[oldX][oldY] = null;
 									PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
 									PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
+								}
+								else {
+									doctor.posX = oldX;
+									doctor.posY = oldY;
 								}
 								return true;
 							}
@@ -90,12 +96,18 @@ public class GuiPatientPopup extends Gui {
 						if(goib.patientUsingBed != null && goib.patientUsingBed.hasBeenDiagnosed) {
 							GameObjectInstanceDoctor doctor = getRandomDoctor();
 							if(doctor != null) {
-								PlayState.objectTiles[doctor.posX][doctor.posY] = null;
+								int oldX = doctor.posX;
+								int oldY = doctor.posY;
 								doctor.posX = GuiPatientPopup.i;
 								doctor.posY = GuiPatientPopup.j + 1;
-								if(PlayState.objectTiles[doctor.posX][doctor.posY] == null) {
+								if(PlayState.objectTiles[doctor.posX][doctor.posY] == null || PlayState.objectTiles[doctor.posX][doctor.posY] == doctor) {
+									PlayState.objectTiles[oldX][oldY] = null;
 									PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
 									PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskTreat();
+								}
+								else {
+									doctor.posX = oldX;
+									doctor.posY = oldY;
 								}
 								return true;
 							}
