@@ -22,11 +22,15 @@ public class Task {
 	public boolean isFinished() {
 		if(timeTakenSoFar >= time) {
 			System.out.println("Task has finished: " + name);
+			onTaskComplete();
 			return true;
 		}
 		else {
-			//System.out.println("Task has been going for: " + timeTakenSoFar + " / " + time);
 			return false;
 		}
+	}
+	
+	public void onTaskComplete() {
+		
 	}
 }
