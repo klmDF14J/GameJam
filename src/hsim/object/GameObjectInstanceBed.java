@@ -26,6 +26,12 @@ public class GameObjectInstanceBed extends GameObjectInstance {
 		int renderOffsetX = (GameInfo.resolution.getWidth() / 2) - ((PlayState.mapSizeX - PlayState.offsetX) * PlayState.tileWidth) / 2;
 		int renderOffsetY = (GameInfo.resolution.getHeight() / 2) - ((PlayState.mapSizeY - PlayState.offsetY) * PlayState.tileHeight) / 2;
 		if(isOccupied()) {
+			if(patientUsingBed.sex == Patient.MALE) {
+				Images.object_bed_occupied_male.draw(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY);
+			}
+			else {
+				Images.object_bed_occupied_female.draw(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY);
+			}
 			if(patientUsingBed.health > 0 && patientUsingBed.health < 100) {
 				Images.progress_bar.draw(i * PlayState.tileWidth + renderOffsetX, j * PlayState.tileHeight + renderOffsetY - 24);
 				

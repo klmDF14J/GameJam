@@ -23,6 +23,8 @@ public class Images {
 	public static Image male;
 	public static Image female;
 	public static Image progress_bar;
+	public static Image object_bed_occupied_male;
+	public static Image object_bed_occupied_female;
 	
 	public static void init() {
 		splash = getImage("splash");
@@ -39,6 +41,8 @@ public class Images {
 		male = getImage("symbol/male");
 		female = getImage("symbol/female");
 		progress_bar = getImage("progress_bar");
+		object_bed_occupied_male = getImage("objects/object_bed_occupied_male");
+		object_bed_occupied_female = getImage("objects/object_bed_occupied_female");
 	}
 
 	public static Image getImage(String imageName) {
