@@ -1,5 +1,6 @@
 package hsim.gui;
 
+import hsim.handler.GameHandler;
 import hsim.handler.GuiHandler;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
@@ -7,6 +8,7 @@ import hsim.resource.Images;
 import hsim.state.PlayState;
 import hsim.task.TaskDiagnose;
 import hsim.task.TaskTreat;
+import hsim.util.GameInfo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -147,8 +149,14 @@ public class GuiPatientPopup extends Gui {
 			public boolean onClicked(Rectangle bounds_mouse) {
 				if(super.onClicked(bounds_mouse)) {
 					GameObjectInstanceBed goib = (GameObjectInstanceBed) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j];
-					goib.patientUsingBed = null;
-					return true;
+					if(goib.patientUsingBed.health >= 90 && goib.patientUsingBed.deteriorationRate <= 0) {
+						goib.patientUsingBed = null;
+						GameHandler.money += 10;
+						return true;
+					}
+					else {
+						return false;
+					}
 				}
 				else {
 					return false;
@@ -181,7 +189,11 @@ public class GuiPatientPopup extends Gui {
 			g.setColor(Color.white);
 			
 			String discharge = "Discharge Patient";
+			if(((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.health < 90 || ((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.deteriorationRate > 0) {
+				g.setColor(Color.red);
+			}
 			g.drawString(discharge, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(discharge) / 2), y + 220);
+			g.setColor(Color.white);
 		}
 	}
 	

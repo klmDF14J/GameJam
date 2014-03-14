@@ -7,6 +7,8 @@ import hsim.patient.Patient;
 
 public class GameHandler {
 
+	public static int money;
+	
 	public static void updateTasks(int mapSizeX, int mapSizeY, GameObjectInstance[][] objectTiles) {
 		for(int i = 0; i < mapSizeX; i++) {
 			for(int j = 0; j < mapSizeY; j++) {
