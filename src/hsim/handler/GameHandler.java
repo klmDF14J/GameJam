@@ -30,31 +30,31 @@ public class GameHandler {
 	
 	private static void setupBeds(GameObjectInstance[][] objectTiles) {
 		objectTiles[0][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[0][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[0][0]).patientUsingBed = new Patient(Patient.MALE, 20, 60);
 		
 		objectTiles[2][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[2][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[2][0]).patientUsingBed = new Patient(Patient.MALE, 20, 83);
 		
 		objectTiles[4][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[4][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[4][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 71);
 		
 		objectTiles[6][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[6][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[6][0]).patientUsingBed = new Patient(Patient.MALE, 20, 94);
 		
 		objectTiles[8][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[8][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[8][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 76);
 		
 		objectTiles[10][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[10][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[10][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 65);
 		
 		objectTiles[12][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[12][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[12][0]).patientUsingBed = new Patient(Patient.MALE, 20, 68);
 		
 		objectTiles[14][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[14][0]).patientUsingBed = new Patient(Patient.MALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[14][0]).patientUsingBed = new Patient(Patient.MALE, 20, 92);
 		
 		objectTiles[16][0] = new GameObjectInstanceBed("Hospital Bed");
-		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 100);
+		((GameObjectInstanceBed) objectTiles[16][0]).patientUsingBed = new Patient(Patient.FEMALE, 20, 87);
 	}
 	
 	private static void setupDoctors(GameObjectInstance[][] objectTiles) {

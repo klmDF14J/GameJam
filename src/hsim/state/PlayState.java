@@ -51,7 +51,7 @@ public class PlayState extends HSimGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		timer++;
-		if(timer >= 3 * GameInfo.fps) {
+		if(timer >= 10 * GameInfo.fps) {
 			GameHandler.deterioratePatients(mapSizeX, mapSizeY, objectTiles);
 			timer = 0;
 		}
