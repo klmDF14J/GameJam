@@ -75,14 +75,12 @@ public class GameHandler {
 				if(objectTiles[i][j] != null && objectTiles[i][j] instanceof GameObjectInstanceBed) {
 					GameObjectInstanceBed goib = (GameObjectInstanceBed) objectTiles[i][j];
 					if(goib.isOccupied()) {
-						if(goib.patientUsingBed.isDeteriorating) {
-							if(goib.patientUsingBed.health - goib.patientUsingBed.deteriorationRate > 0) {
-								goib.patientUsingBed.health -= goib.patientUsingBed.deteriorationRate;
-							}
-							else {
-								goib.patientUsingBed.health = 0;
-								goib.patientUsingBed = null;
-							}
+						if(goib.patientUsingBed.health - goib.patientUsingBed.deteriorationRate > 0) {
+							goib.patientUsingBed.health -= goib.patientUsingBed.deteriorationRate;
+						}
+						else {
+							goib.patientUsingBed.health = 0;
+							goib.patientUsingBed = null;
 						}
 					}
 				}
