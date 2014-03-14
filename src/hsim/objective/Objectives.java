@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class Objectives {
 	
 	public static ArrayList<Objective> objectives = new ArrayList<Objective>();
-	public static int current_objective;
+	public static int current_objective = 1;
 	
 	public static void init() {
+		objectives.add(new Objective("null", "null"));
 		objectives.add(new Objective("Paperwork...", "Place One Reception Desk") {
 			@Override
 			public boolean isComplete() {

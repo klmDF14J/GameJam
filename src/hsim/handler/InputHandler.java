@@ -16,7 +16,6 @@ public class InputHandler {
 
 	public static void keyPressed(int key, char c, int mapSizeX, int mapSizeY, int offsetX, int offsetY, GameObjectInstance[][] objectTiles) {
 		if(GuiHandler.currentGui == null) {
-			System.out.println(Keyboard.getKeyName(key));
 			if(key == KeyInfo.ctrl) {
 				PlayState.showWalls = PlayState.showWalls ? false : true;
 			}

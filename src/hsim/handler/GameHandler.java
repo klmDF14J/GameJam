@@ -95,8 +95,13 @@ public class GameHandler {
 
 	public static void updateObjective(GameObjectInstance[][] objectTiles) {
 		Objective objective = Objectives.objectives.get(Objectives.current_objective);
-		if(objective.isComplete()) {
-			Objectives.current_objective = Objectives.current_objective + 1 < Objectives.objectives.size() ? Objectives.current_objective++ : Objectives.current_objective;
+		if(objective != null && objective.isComplete()) {
+			if(Objectives.current_objective + 1 < Objectives.objectives.size()) {
+				Objectives.current_objective++;
+			}
+			else {
+				Objectives.current_objective = 0;
+			}
 		}
 	}
 
