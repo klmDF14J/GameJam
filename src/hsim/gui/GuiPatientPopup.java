@@ -76,6 +76,7 @@ public class GuiPatientPopup extends Gui {
 									PlayState.objectTiles[oldX][oldY] = null;
 									PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
 									PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskDiagnose();
+									GuiHandler.currentGui = null;
 								}
 								else {
 									doctor.posX = oldX;
@@ -119,6 +120,7 @@ public class GuiPatientPopup extends Gui {
 									PlayState.objectTiles[oldX][oldY] = null;
 									PlayState.objectTiles[doctor.posX][doctor.posY] = doctor;
 									PlayState.objectTiles[doctor.posX][doctor.posY].currentTask = new TaskTreat();
+									GuiHandler.currentGui = null;
 								}
 								else {
 									doctor.posX = oldX;
@@ -152,6 +154,7 @@ public class GuiPatientPopup extends Gui {
 					if(goib.patientUsingBed.health >= 90 && goib.patientUsingBed.deteriorationRate <= 0) {
 						goib.patientUsingBed = null;
 						GameHandler.money += 10;
+						GuiHandler.currentGui = null;
 						return true;
 					}
 					else {
