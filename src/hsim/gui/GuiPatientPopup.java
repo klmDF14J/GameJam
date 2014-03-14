@@ -183,10 +183,6 @@ public class GuiPatientPopup extends Gui {
 			String discharge = "Discharge Patient";
 			g.drawString(discharge, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(discharge) / 2), y + 220);
 		}
-		else {
-			String no_patient = "Unoccupied";
-			g.drawString(no_patient, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(no_patient) / 2), y + 25);
-		}
 	}
 	
 	@Override

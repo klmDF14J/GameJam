@@ -5,6 +5,7 @@ import org.newdawn.slick.geom.Rectangle;
 import hsim.gui.GuiPatientPopup;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
+import hsim.object.GameObjectInstanceBed;
 import hsim.object.Objects;
 import hsim.util.GameInfo;
 import hsim.util.KeyInfo;
@@ -68,7 +69,9 @@ public class InputHandler {
 				  for(int j = 0; j < mapSizeY - offsetY; j++) {
 					  Rectangle bounds_tile = new Rectangle(i * tileWidth + renderOffsetX, j * tileWidth + renderOffsetY, tileWidth, tileHeight); 
 					  if(bounds_mouse.intersects(bounds_tile) && objectTiles[i][j] != null && objectTiles[i][j].storedGameObject.id == 1) {
-						  GuiHandler.showGui(new GuiPatientPopup("patient_popup", x, y, i, j));
+						  if(((GameObjectInstanceBed) objectTiles[i][j]).patientUsingBed != null) {
+							  GuiHandler.showGui(new GuiPatientPopup("patient_popup", x, y, i, j));
+						  }
 					  }
 				  }
 			}
