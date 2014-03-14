@@ -10,8 +10,8 @@ public class Objectives {
 	public static int current_objective = 1;
 	
 	public static void init() {
-		objectives.add(new Objective("null", "null"));
-		objectives.add(new Objective("Paperwork...", "Place One Reception Desk") {
+		objectives.add(new Objective("", "Completed All Objectives", 0));
+		objectives.add(new Objective("Paperwork...", "Place One Reception Desk", 50) {
 			@Override
 			public boolean isComplete() {
 				for(int i = 0; i < PlayState.mapSizeX; i++) {
