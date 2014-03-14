@@ -13,4 +13,5 @@ public class KeyInfo {
 	public static int select_up = Keyboard.KEY_NUMPAD8;
 	public static int select_down = Keyboard.KEY_NUMPAD2;
 	public static int escape = Keyboard.KEY_ESCAPE;
+	public static int shop = Keyboard.KEY_S;
 }

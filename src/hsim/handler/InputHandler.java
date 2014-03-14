@@ -1,6 +1,7 @@
 package hsim.handler;
 
 import hsim.gui.GuiPatientPopup;
+import hsim.gui.GuiShop;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
@@ -54,6 +55,9 @@ public class InputHandler {
 				if(PlayState.currentObject > 0) {
 					PlayState.currentObject--;
 				}
+			}
+			if(key == KeyInfo.shop) {
+				GuiHandler.showGui(new GuiShop("shop"));
 			}
 		}
 		else {
