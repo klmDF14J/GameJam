@@ -1,57 +1,60 @@
 package hsim.handler;
 
-import org.newdawn.slick.geom.Rectangle;
-
 import hsim.gui.GuiPatientPopup;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.Objects;
+import hsim.state.PlayState;
 import hsim.util.GameInfo;
 import hsim.util.KeyInfo;
 
+import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.geom.Rectangle;
+
 public class InputHandler {
 
-	public static void keyPressed(int key, char c, boolean showWalls, int highlightedI, int highlightedJ, int mapSizeX, int mapSizeY, int offsetX, int offsetY, int currentObject, GameObjectInstance[][] objectTiles) {
+	public static void keyPressed(int key, char c, int mapSizeX, int mapSizeY, int offsetX, int offsetY, GameObjectInstance[][] objectTiles) {
 		if(GuiHandler.currentGui == null) {
+			System.out.println(Keyboard.getKeyName(key));
 			if(key == KeyInfo.ctrl) {
-				showWalls = showWalls ? false : true;
+				PlayState.showWalls = PlayState.showWalls ? false : true;
 			}
 			if(key == KeyInfo.left) {
-				if(highlightedI > 0) {
-					highlightedI--;
+				if(PlayState.highlightedI > 0) {
+					PlayState.highlightedI--;
 				}
 			}
 			if(key == KeyInfo.right) {
-				if(highlightedI + 1 < mapSizeX - offsetX) {
-					highlightedI++;
+				if(PlayState.highlightedI + 1 < mapSizeX - offsetX) {
+					PlayState.highlightedI++;
 				}
 			}
 			if(key == KeyInfo.up) {
-				if(highlightedJ > 0) {
-					highlightedJ--;
+				if(PlayState.highlightedJ > 0) {
+					PlayState.highlightedJ--;
 				}
 			}
 			if(key == KeyInfo.down) {
-				if(highlightedJ + 1 < mapSizeY - offsetY) {
-					highlightedJ++;
+				if(PlayState.highlightedJ + 1 < mapSizeY - offsetY) {
+					PlayState.highlightedJ++;
 				}
 			}
 			if(key == KeyInfo.advance) {
-				GameObject object = Objects.gameObjects.get(currentObject);
+				GameObject object = Objects.gameObjects.get(PlayState.currentObject);
 				if(object != null) {
-					object.onPlaced(highlightedI, highlightedJ);
-					objectTiles[highlightedI][highlightedJ] = new GameObjectInstance(object);
+					object.onPlaced(PlayState.highlightedI, PlayState.highlightedJ);
+					objectTiles[PlayState.highlightedI][PlayState.highlightedJ] = new GameObjectInstance(object);
 				}
 			}
 			if(key == KeyInfo.select_up) {
-				if(currentObject + 1 < Objects.gameObjects.size()) {
-					currentObject++;
+				if(PlayState.currentObject + 1 < Objects.gameObjects.size()) {
+					PlayState.currentObject++;
 				}
 			}
 			if(key == KeyInfo.select_down) {
-				if(currentObject > 0) {
-					currentObject--;
+				if(PlayState.currentObject > 0) {
+					PlayState.currentObject--;
 				}
 			}
 		}

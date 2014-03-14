@@ -3,6 +3,8 @@ package hsim.handler;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
 import hsim.object.GameObjectInstanceDoctor;
+import hsim.objective.Objective;
+import hsim.objective.Objectives;
 import hsim.patient.Patient;
 
 public class GameHandler {
@@ -87,6 +89,14 @@ public class GameHandler {
 					}
 				}
 			}
+		}
+	}
+
+
+	public static void updateObjective(GameObjectInstance[][] objectTiles) {
+		Objective objective = Objectives.objectives.get(Objectives.current_objective);
+		if(objective.isComplete()) {
+			Objectives.current_objective = Objectives.current_objective + 1 < Objectives.objectives.size() ? Objectives.current_objective++ : Objectives.current_objective;
 		}
 	}
 

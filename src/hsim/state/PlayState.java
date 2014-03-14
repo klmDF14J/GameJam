@@ -24,9 +24,9 @@ public class PlayState extends HSimGameState {
 
 	public static GameObjectInstance[][] objectTiles = new GameObjectInstance[mapSizeX - offsetX][mapSizeY - offsetY];
 	
-	private static boolean showWalls = true;
+	public static boolean showWalls = true;
 	
-	private static int currentObject;
+	public static int currentObject;
 
 	public PlayState(int id) {
 		super(id);
@@ -37,8 +37,8 @@ public class PlayState extends HSimGameState {
 		GameHandler.setupWard(objectTiles);
 	}
 
-	int highlightedI;
-	int highlightedJ;
+	public static int highlightedI;
+	public static int highlightedJ;
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -57,11 +57,12 @@ public class PlayState extends HSimGameState {
 		}
 		timer++;
 		GameHandler.updateTasks(mapSizeX, mapSizeY, objectTiles);
+		GameHandler.updateObjective(objectTiles);
 	}
 	
 	@Override
 	public void keyPressed(int key, char c) {
-		InputHandler.keyPressed(key, c, showWalls, highlightedI, highlightedJ, mapSizeX, mapSizeY, offsetX, offsetY, currentObject, objectTiles);
+		InputHandler.keyPressed(key, c, mapSizeX, mapSizeY, offsetX, offsetY, objectTiles);
 	}
 	
 	@Override
