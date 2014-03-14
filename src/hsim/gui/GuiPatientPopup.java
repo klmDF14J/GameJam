@@ -28,6 +28,7 @@ public class GuiPatientPopup extends Gui {
 	private Button info;
 	private Button diagnose;
 	private Button treat;
+	private Button discharge;
 	
 	public GuiPatientPopup(String texture_name, int x, int y, int i, int j) {
 		super(texture_name);
@@ -140,31 +141,52 @@ public class GuiPatientPopup extends Gui {
 				}
 			}
 		};
+		
+		discharge = new Button(x, y + 192, 256, 64) {
+			@Override
+			public boolean onClicked(Rectangle bounds_mouse) {
+				if(super.onClicked(bounds_mouse)) {
+					GameObjectInstanceBed goib = (GameObjectInstanceBed) PlayState.objectTiles[GuiPatientPopup.i][GuiPatientPopup.j];
+					goib.patientUsingBed = null;
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		};
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		float scale = 1F;
 		gui_texture.draw(x, y, scale);
-		String info = "Patient Information";
-		g.drawString(info, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(info) / 2), y + 25);
 		
-		String diagnose = "Diagnose Patient";
-		if(((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.hasBeenDiagnosed) {
-			g.setColor(Color.red);
+		if(((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed != null) {
+			String info = "Patient Information";
+			g.drawString(info, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(info) / 2), y + 25);
+			
+			String diagnose = "Diagnose Patient";
+			if(((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.hasBeenDiagnosed) {
+				g.setColor(Color.red);
+			}
+			g.drawString(diagnose, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(diagnose) / 2), y + 90);
+			g.setColor(Color.white);
+			
+			String treat = "Treat Patient";
+			if(!((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.hasBeenDiagnosed) {
+				g.setColor(Color.red);
+			}
+			g.drawString(treat, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(treat) / 2), y + 155);
+			g.setColor(Color.white);
+			
+			String discharge = "Discharge Patient";
+			g.drawString(discharge, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(discharge) / 2), y + 220);
 		}
-		g.drawString(diagnose, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(diagnose) / 2), y + 90);
-		g.setColor(Color.white);
-		
-		String treat = "Treat Patient";
-		if(!((GameObjectInstanceBed) PlayState.objectTiles[i][j]).patientUsingBed.hasBeenDiagnosed) {
-			g.setColor(Color.red);
+		else {
+			String no_patient = "Unoccupied";
+			g.drawString(no_patient, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(no_patient) / 2), y + 25);
 		}
-		g.drawString(treat, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(treat) / 2), y + 155);
-		g.setColor(Color.white);
-		
-		String discharge = "Discharge Patient";
-		g.drawString(discharge, x + (gui_texture.getWidth() / 2) - (g.getFont().getWidth(discharge) / 2), y + 220);
 	}
 	
 	@Override
@@ -174,6 +196,7 @@ public class GuiPatientPopup extends Gui {
 		info.onClicked(bounds_mouse);
 		diagnose.onClicked(bounds_mouse);
 		treat.onClicked(bounds_mouse);
+		discharge.onClicked(bounds_mouse);
 	}
 	
 	private static GameObjectInstanceDoctor getRandomDoctor() {
