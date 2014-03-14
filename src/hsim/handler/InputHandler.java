@@ -9,7 +9,6 @@ import hsim.state.PlayState;
 import hsim.util.GameInfo;
 import hsim.util.KeyInfo;
 
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.geom.Rectangle;
 
 public class InputHandler {

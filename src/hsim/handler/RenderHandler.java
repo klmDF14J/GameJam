@@ -6,6 +6,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
 
 import hsim.object.GameObjectInstance;
+import hsim.objective.Objectives;
 import hsim.resource.Images;
 import hsim.util.GameInfo;
 
@@ -73,5 +74,11 @@ public class RenderHandler {
 	public static void renderOverlay(Graphics g) {
 		String money = "Total Money: ";
 		g.drawString(money + GameHandler.money, GameInfo.resolution.getWidth() - 200, GameInfo.resolution.getHeight() - 40);
+		
+		String objective_name = Objectives.objectives.get(Objectives.current_objective).name;
+		g.drawString(objective_name, 10, GameInfo.resolution.getHeight() - 80);
+		
+		String objective_script = Objectives.objectives.get(Objectives.current_objective).script;
+		g.drawString(objective_script, 10, GameInfo.resolution.getHeight() - 40);
 	}
 }
