@@ -44,17 +44,18 @@ public class PlayState extends HSimGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 	    RenderHandler.renderMap(mapSizeX, mapSizeY, offsetX, offsetY, tileWidth, tileHeight, highlightedI, highlightedJ, objectTiles, gc, sbg, g);
 	    RenderHandler.renderGui(g);
+	    RenderHandler.renderOverlay(g);
 	}
 	
 	int timer;
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		timer++;
 		if(timer >= 10 * GameInfo.fps) {
 			GameHandler.deterioratePatients(mapSizeX, mapSizeY, objectTiles);
 			timer = 0;
 		}
+		timer++;
 		GameHandler.updateTasks(mapSizeX, mapSizeY, objectTiles);
 	}
 	

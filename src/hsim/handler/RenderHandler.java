@@ -69,4 +69,9 @@ public class RenderHandler {
 			GuiHandler.currentGui.render(g);
 		}
 	}
+
+	public static void renderOverlay(Graphics g) {
+		String money = "Total Money: ";
+		g.drawString(money + GameHandler.money, GameInfo.resolution.getWidth() - 200, GameInfo.resolution.getHeight() - 40);
+	}
 }
