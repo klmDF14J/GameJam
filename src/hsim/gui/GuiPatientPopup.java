@@ -8,7 +8,6 @@ import hsim.resource.Images;
 import hsim.state.PlayState;
 import hsim.task.TaskDiagnose;
 import hsim.task.TaskTreat;
-import hsim.util.GameInfo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,8 +37,8 @@ public class GuiPatientPopup extends Gui {
 		this.gui_texture = Images.getImage("gui/" + texture_name);
 		this.x = x;
 		this.y = y;
-		this.i = i;
-		this.j = j;
+		GuiPatientPopup.i = i;
+		GuiPatientPopup.j = j;
 		
 		info = new Button(x, y, 256, 64) {
 			@Override
