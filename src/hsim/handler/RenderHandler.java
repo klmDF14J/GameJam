@@ -72,13 +72,13 @@ public class RenderHandler {
 	}
 
 	public static void renderOverlay(Graphics g) {
-		String money = "Total Money: ";
-		g.drawString(money + GameHandler.money, GameInfo.resolution.getWidth() - 200, GameInfo.resolution.getHeight() - 40);
+		String money = "Total Money: " + GameHandler.money;
+		g.drawString(money, GameInfo.resolution.getWidth() - g.getFont().getWidth(money) - 10, GameInfo.resolution.getHeight() - 20);
 		
 		String objective_name = Objectives.objectives.get(Objectives.current_objective).name;
-		g.drawString(objective_name, 10, GameInfo.resolution.getHeight() - 80);
+		g.drawString(objective_name, 10, GameInfo.resolution.getHeight() - 35);
 		
 		String objective_script = Objectives.objectives.get(Objectives.current_objective).script;
-		g.drawString(objective_script, 10, GameInfo.resolution.getHeight() - 40);
+		g.drawString(objective_script, 10, GameInfo.resolution.getHeight() - 20);
 	}
 }
