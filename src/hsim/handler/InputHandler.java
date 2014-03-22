@@ -1,7 +1,7 @@
 package hsim.handler;
 
 import hsim.gui.GuiPatientPopup;
-import hsim.gui.GuiShop;
+import hsim.gui.GuiObjectPlacement;
 import hsim.object.GameObject;
 import hsim.object.GameObjectInstance;
 import hsim.object.GameObjectInstanceBed;
@@ -42,22 +42,15 @@ public class InputHandler {
 			if(key == KeyInfo.advance) {
 				GameObject object = Objects.gameObjects.get(PlayState.currentObject);
 				if(object != null) {
-					object.onPlaced(PlayState.highlightedI, PlayState.highlightedJ);
-					objectTiles[PlayState.highlightedI][PlayState.highlightedJ] = new GameObjectInstance(object);
+					if(GuiObjectPlacement.amounts[PlayState.currentObject] > 0) {
+						object.onPlaced(PlayState.highlightedI, PlayState.highlightedJ);
+						objectTiles[PlayState.highlightedI][PlayState.highlightedJ] = new GameObjectInstance(object);
+						GuiObjectPlacement.amounts[PlayState.currentObject]--;
+					}
 				}
 			}
-			if(key == KeyInfo.select_up) {
-				if(PlayState.currentObject + 1 < Objects.gameObjects.size()) {
-					PlayState.currentObject++;
-				}
-			}
-			if(key == KeyInfo.select_down) {
-				if(PlayState.currentObject > 0) {
-					PlayState.currentObject--;
-				}
-			}
-			if(key == KeyInfo.shop) {
-				GuiHandler.showGui(new GuiShop("shop"));
+			if(key == KeyInfo.object_placement) {
+				GuiHandler.showGui(new GuiObjectPlacement("object_placement"));
 			}
 		}
 		else {
